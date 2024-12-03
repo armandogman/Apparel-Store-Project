@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>400 Bad Request</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            background-color: #b02323;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #e74c3c;
+            font-size: 72px;
+        }
+        p {
+            font-size: 24px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+            background-color: white;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>400</h1>
+        <p>Bad Request</p>
+        <p>{{ message }}.</p>
+        <a href="/">Go Back to Home</a>
+    </div>
+
+</body>
+</html>

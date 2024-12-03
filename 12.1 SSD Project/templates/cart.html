@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+        }
+
+        header {
+            background-color: white;
+            border-bottom: 1px solid #e1e1e1;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: #e60023;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #e60023;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #e1e1e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            color: #555;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #e60023;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #c50f1f;
+        }
+
+        .add-item-form {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .add-item-form label,
+        .add-item-form input {
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        footer {
+            background-color: white;
+            border-top: 1px solid #e1e1e1;
+            text-align: center;
+            padding: 20px 0;
+            color: #666;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-btn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgb(255, 0, 0);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            width: 100%;
+        }
+
+        .dropdown-content div {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-content img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .dropdown-content span {
+            font-size: 16px;
+        }
+
+        .cart {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+
+        .cart h2 {
+            margin-top: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cart-item img {
+            width: 40px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .cart-item span {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Underground Apparel</h1>
+        <nav>
+            <a href="/">Home</a>
+            {% if not session['username'] %}
+                <a href="/login">Log In</a>
+            {% else %}
+                <a href="/profile">Profile</a>
+                <a href="/logout">Log Out</a>
+            {% endif %}
+        </nav>
+    </header>
+    <h1>Your Cart</h1>
+
+    <!-- Dropdown Menu -->
+    <div class="custom-dropdown">
+        <button class="dropdown-btn">Select Item</button>
+        <div class="dropdown-content">
+            <div data-value="Underground Apparel Kuruma Short Sleeve T-Shirt" data-img="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_54587b00-1492-4aed-b2a1-5c716a0d146b.png?v=1724100444&width=990">
+                <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_54587b00-1492-4aed-b2a1-5c716a0d146b.png?v=1724100444&width=990" alt="Kuruma Image">
+                <span>Kuruma Short Sleeve T-Shirt</span>
+            </div>
+            <div data-value="Underground Apparel AKITA Premium Short Sleeve T-Shirt 2" data-img="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_d4907686-5cf9-4500-844f-0b51e716f639.png?v=1730560531&width=990">
+                <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_d4907686-5cf9-4500-844f-0b51e716f639.png?v=1730560531&width=990" alt="Akita Image">
+                <span>AKITA Premium Short Sleeve T-Shirt 2</span>
+            </div>
+            <div data-value="Underground Apparel Car T-Shirt" data-img="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_7729d445-5c18-4994-b641-32d30f2456ee.png?v=1729003983&width=990">
+                <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_7729d445-5c18-4994-b641-32d30f2456ee.png?v=1729003983&width=990" alt="Rising Sun Image">
+                <span>Car T-Shirt</span>
+            </div>
+            <div data-value="Underground Apparel Monaco Premium Short Sleeve T-Shirt" data-img="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_daae5a89-2e19-49d7-a656-5d6302847019.png?v=1721425091&width=990">
+                <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_daae5a89-2e19-49d7-a656-5d6302847019.png?v=1721425091&width=990" alt="Monaco Image">
+                <span>Monaco Premium Short Sleeve T-Shirt</span>
+            </div>
+            <div data-value="Underground Apparel 956 Hat" data-img="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_caf3dd6c-628a-4bdc-aba4-d0864728efab.png?v=1727659991&width=990">
+                <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_caf3dd6c-628a-4bdc-aba4-d0864728efab.png?v=1727659991&width=990" alt="956 Hat Image">
+                <span>956 Hat</span>
+            </div>
+        </div>
+    </div>
+
+    <form id="cart-form">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1">
+        <button type="button" id="add-to-cart-btn">Add to Cart</button>
+    </form>
+
+    <!-- Cart Display -->
+    <div class="cart">
+        <h2>Cart Items</h2>
+        <div id="cart-items"></div>
+    </div>
+
+    <script>
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const cartItemsContainer = document.getElementById('cart-items');
+
+        let selectedItem = null;
+
+        // Toggle dropdown visibility
+        dropdownBtn.addEventListener('click', () => {
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Handle item selection
+        dropdownContent.addEventListener('click', (e) => {
+            if (e.target.closest('div')) {
+                selectedItem = e.target.closest('div');
+                dropdownBtn.textContent = selectedItem.querySelector('span').textContent;
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        // Add item to cart
+        addToCartBtn.addEventListener('click', () => {
+            if (!selectedItem) {
+                alert("Please select an item before adding to the cart.");
+                return;
+            }
+
+            const itemName = selectedItem.getAttribute('data-value');
+            const itemImg = selectedItem.getAttribute('data-img');
+            const quantity = document.getElementById('quantity').value;
+
+            // Create a new cart item element
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="${itemImg}" alt="${itemName}">
+                <span>${itemName} (x${quantity})</span>
+                <button class="remove-btn">Remove</button>
+            `;
+
+            // Add functionality to remove item
+            cartItem.querySelector('.remove-btn').addEventListener('click', () => {
+                cartItemsContainer.removeChild(cartItem);
+            });
+
+            // Append the item to the cart
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        // Close the dropdown if clicking outside
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.custom-dropdown')) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

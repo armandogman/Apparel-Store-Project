@@ -1,0 +1,218 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #fafafa; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #fff; border-bottom: 1px solid #e1e1e1; }
+        .navbar-logo { font-size: 24px; font-weight: bold; color: #e60023; text-decoration: none; }
+        .navbar-links a { margin-left: 20px; font-size: 16px; color: #333; text-decoration: none; }
+        .profile-header { display: flex; align-items: center; padding: 20px; background-color: #fff; border-bottom: 1px solid #e1e1e1; }
+        .profile-picture { width: 80px; height: 80px; border-radius: 50%; background-color: #ddd; margin-right: 20px; }
+        .tabs { display: flex; justify-content: center; background-color: white; padding: 10px 0; border-bottom: 1px solid #e1e1e1; }
+        .tab { margin: 0 15px; font-weight: bold; color: #333; cursor: pointer; }
+        .tab:hover, .tab.active { color: #e60023; }
+        .wishlist-grid, .cart, .orders { display: none; padding: 20px; }
+        .wishlist-item, .cart-item { display: inline-block; width: 100%; background-color: #fff; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 10px; }
+        .wishlist-item img, .cart-item img { width: 100%; display: block; }
+        .custom-dropdown, .add-item-form { margin: 10px 0; text-align: center; }
+        .dropdown-btn { padding: 10px; font-size: 16px; cursor: pointer; background-color: #e60023; color: white; border: none; border-radius: 5px; }
+        .dropdown-content { display: none; position: absolute; background-color: white; width: 100%; border: 1px solid #ddd; z-index: 1; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        .cart { border: 1px solid #ccc; padding: 10px; border-radius: 5px; }
+        .cart h2 { margin-top: 0; }
+        .orders p { color: #999; font-size: 16px; }
+        
+.wishlist-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between items */
+    justify-content: center; /* Center-align items */
+}
+
+.wishlist-item {
+    flex: 1 1 calc(25% - 30px); /* Adjust to show 4 items per row */
+    max-width: calc(25% - 30px);
+    box-sizing: border-box;
+}
+
+.wishlist-item img {
+    width: 100%; /* Ensure images are responsive */
+    height: auto;
+}
+
+.wishlist-item-details {
+    text-align: center; /* Center-align text under the image */
+}
+
+.cart-items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between items */
+    justify-content: center; /* Center-align items */
+}
+
+.cart-item {
+    flex: 1 1 calc(25% - 30px); /* Adjust to show 4 items per row */
+    max-width: calc(25% - 30px);
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-item img {
+    width: 100%; /* Ensure images are responsive */
+    height: auto;
+    border-radius: 5px; /* Optional: adds rounded corners to images */
+}
+
+.cart-item h4 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.cart-item p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+
+    </style>
+<body>
+
+    <div class="navbar">
+        <a href="/" class="navbar-logo">Underground Apparel</a>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        </div>
+    </div>
+    
+    {% if session['username'] and session['email'] %}
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://i.pinimg.com/564x/1a/c0/23/1ac0231aa6d74d092328d445aa98183e.jpg" alt="Profile Picture" class="profile-picture">
+            <div class="profile-info">
+                <h1>{{ session['username'] }}</h1>
+                <p><strong>Email:</strong> {{ session['email'] }}</p>
+            </div>
+        </div>
+        <div class="tabs">
+            <div id="wishlist-tab" class="tab active" onclick="showSection('wishlist')">Wishlist</div>
+            <div id="cart-tab" class="tab" onclick="showSection('cart')">Cart</div>
+            <div id="orders-tab" class="tab" onclick="showSection('orders')">Past Orders</div>
+        </div>
+    </div>
+    {% endif %}
+    
+    
+    <!-- Products Section -->
+    <div id="wishlist" class="wishlist-grid">
+        <div class="wishlist-item">
+            <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_54587b00-1492-4aed-b2a1-5c716a0d146b.png?v=1724100444&width=990" alt="Kuruma T-Shirt">
+            <div class="wishlist-item-details">
+                <h3>Kuruma T-Shirt</h3>
+                <p>$25.00</p>
+                <button class="add-to-cart-btn" data-name="Kuruma T-Shirt" data-price="25.00" data-image="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_54587b00-1492-4aed-b2a1-5c716a0d146b.png?v=1724100444&width=990">Add to Cart</button>
+            </div>
+        </div>
+        <div class="wishlist-item">
+            <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_d4907686-5cf9-4500-844f-0b51e716f639.png?v=1730560531&width=990" alt="AKITA T-Shirt">
+            <div class="wishlist-item-details">
+                <h3>AKITA T-Shirt</h3>
+                <p>$30.00</p>
+                <button class="add-to-cart-btn" data-name="AKITA T-Shirt" data-price="30.00" data-image="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_d4907686-5cf9-4500-844f-0b51e716f639.png?v=1730560531&width=990">Add to Cart</button>
+            </div>
+        </div>
+        <div class="wishlist-item">
+            <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_7729d445-5c18-4994-b641-32d30f2456ee.png?v=1729003983&width=990" alt="Rising Sun T-Shirt">
+            <div class="wishlist-item-details">
+                <h3>Rising Sun T-Shirt</h3>
+                <p>$35.00</p>
+                <button class="add-to-cart-btn" data-name="Rising Sun T-Shirt" data-price="35.00" data-image="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_7729d445-5c18-4994-b641-32d30f2456ee.png?v=1729003983&width=990">Add to Cart</button>
+            </div>
+        </div>
+        <div class="wishlist-item">
+            <img src="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_daae5a89-2e19-49d7-a656-5d6302847019.png?v=1721425091&width=990" alt="Monanco T-Shirt">
+            <div class="wishlist-item-details">
+                <h3>Monanco T-Shirt</h3>
+                <p>$28.00</p>
+                <button class="add-to-cart-btn" data-name="Monanco T-Shirt" data-price="28.00" data-image="https://undergroundapparelstore.com/cdn/shop/files/DynamicImageHandler_daae5a89-2e19-49d7-a656-5d6302847019.png?v=1721425091&width=990">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Section -->
+    <div id="cart" class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items">
+            <p>Your cart is empty.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle sections
+        function showSection(section) {
+            document.querySelectorAll('.wishlist-grid, .cart').forEach(function(element) {
+                element.style.display = 'none';
+            });
+            document.getElementById(section).style.display = 'block';
+        }
+        showSection('wishlist'); // Default section
+    
+        // Add to Cart functionality
+        const cartItems = [];
+    
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = this.getAttribute('data-price');
+                const image = this.getAttribute('data-image');
+                const quantity = 1; // Default quantity
+                
+                const existingItem = cartItems.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cartItems.push({ name, price, image, quantity });
+                }
+    
+                updateCart();
+            });
+        });
+    
+        // Updated function to apply grid layout to the cart
+        function updateCart() {
+            const cartContainer = document.getElementById('cart-items');
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cartContainer.innerHTML = `
+                    <div class="cart-items-grid">
+                        ${cartItems.map(item => `
+                            <div class="cart-item">
+                                <img src="${item.image}" alt="${item.name}">
+                                <h4>${item.name}</h4>
+                                <p>Price: $${item.price}</p>
+                                <p>Quantity: ${item.quantity}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+    </script>
+    
+    
+    </body>
+    
+    
+</html>
