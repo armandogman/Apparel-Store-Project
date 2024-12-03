@@ -15,8 +15,8 @@ app.config.update(
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '$Fishingrod2431',
-    'database': 'myDB'
+    'password': 'addyourpasswordhere',
+    'database': 'addyourdatabasenamehere'
 }
 
 # Database Utilities
