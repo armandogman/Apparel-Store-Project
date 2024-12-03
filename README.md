@@ -15,7 +15,7 @@ A modern, stylish apparel store offering high-quality and curated collections fo
 ## Getting Started
 
 Follow these steps to explore Underground Apparel:  
-1. **Visit the Store completed version**: [https://undergroundapparelstore.com/](#)  
+1. **Visit the Store completed version**:  [Underground Apparel Website](https://undergroundapparelstore.com/) 
 2. **Insert your database Login Information**: In app.py add your password my mysql and database name
 3. **Run the program**: In the main folder run the command: python app.py  
 4. **Purchase and Enjoy**: Check out securely and have your order delivered to your doorstep.  
@@ -33,6 +33,17 @@ At Underground Apparel, we believe fashion is a form of self-expression. Our mis
 ## Installation (if applicable)
 
 If you're setting up a project related to Underground Apparel:
+
+Contribution
+We welcome contributions! If you’d like to suggest features, fix bugs, or collaborate, feel free to:
+
+Open an issue
+Submit a pull request
+License
+This project is licensed under the MIT License.
+
+Contact Us
+Website: UndergroundApparelStore.com
 
 ```bash
 # Clone the repository
